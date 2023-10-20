@@ -10,24 +10,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Area {
   id          Int       @id @default(autoincrement())
   name        String
-  assistants  Assistant[]
+  asistente  Asistente[]
 }
 
-model Assistant {
+model Asistente {
   id         Int       @id @default(autoincrement())
   name       String
   area       Area      @relation(fields: [areaId], references: [id])
   areaId     Int
-  assistances Asistencia[]
-}
-
-model Asistencia {
-  id           Int       @id @default(autoincrement())
-  date         DateTime
-  assistant     Assistant @relation(fields: [assistantId], references: [id])
-  assistantId   Int
+  asistencia Asistencia[]
 } /////// Emeli no hace tarea 
