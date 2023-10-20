@@ -1,6 +1,6 @@
 // app.ts
 import express from 'express';
-import routes from './rutas';
+import routes from './rutas'; // Importa las rutas desde tu archivo routes.ts
 
 const app = express();
 
