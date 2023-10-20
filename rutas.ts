@@ -21,7 +21,6 @@ router.get('/clientes/:id', async (req, res) => {
 });
 
 // Rutas para las operaciones CRUD de Clientes
-// Puedes crear rutas similares para las operaciones CRUD de Asistencia
 
 // Ruta para crear un nuevo cliente
 router.post('/clientes', async (req, res) => {
@@ -102,7 +101,7 @@ router.get('/areas/:id', async (req, res) => {
   res.json(area);
 });
 
-// Rutas para el modelo Modelos
+// Rutas para Modelos
 router.get('/modelos', async (req, res) => {
   const modelos = await prisma.modelos.findMany();
   res.json(modelos);
