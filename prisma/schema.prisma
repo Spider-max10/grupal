@@ -36,4 +36,29 @@ model Asistente {
   area       Area      @relation(fields: [areaId], references: [id])
   areaId     Int
   asistencia Asistencia[]
-} /////// Emeli no hace tarea 
+} 
+
+model Cliente {
+  id       Int      @id @default(autoincrement())
+  nombre   String
+  correo   String
+  asistencias Asistencia[]
+}
+
+
+model Asistencia {
+  id           Int       @id @default(autoincrement())
+  fecha        DateTime
+  clienteId    Int
+  serieId      Int
+  asistenteId  Int
+  cliente      Cliente   @relation(fields: [clienteId], references: [id])
+  serie        Series     @relation(fields: [serieId], references: [id])
+  asistente    Asistente @relation(fields: [asistenteId], references: [id])
+}
+
+
+
+
+
+/////// Emeli no hace tarea 
