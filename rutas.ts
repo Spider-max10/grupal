@@ -52,4 +52,69 @@ router.delete('/clientes/:id', async (req, res) => {
   res.json({ message: 'Cliente eliminado correctamente' });
 });
 
+
+
+
+
+
+
+
+
+// Rutas para el modelo Serie
+router.get('/series', async (req, res) => {
+  const series = await prisma.series.findMany();
+  res.json(series);
+});
+
+router.get('/series/:id', async (req, res) => {
+  const { id } = req.params;
+  const serie = await prisma.series.findUnique({
+    where: { id: parseInt(id) },
+  });
+  res.json(serie);
+});
+
+// Rutas para el modelo Asistente
+router.get('/asistentes', async (req, res) => {
+  const asistentes = await prisma.asistente.findMany();
+  res.json(asistentes);
+});
+
+router.get('/asistentes/:id', async (req, res) => {
+  const { id } = req.params;
+  const asistente = await prisma.asistente.findUnique({
+    where: { id: parseInt(id) },
+  });
+  res.json(asistente);
+});
+
+// Rutas para el modelo Area
+router.get('/areas', async (req, res) => {
+  const areas = await prisma.area.findMany();
+  res.json(areas);
+});
+
+router.get('/areas/:id', async (req, res) => {
+  const { id } = req.params;
+  const area = await prisma.area.findUnique({
+    where: { id: parseInt(id) },
+  });
+  res.json(area);
+});
+
+// Rutas para el modelo Modelos
+router.get('/modelos', async (req, res) => {
+  const modelos = await prisma.modelos.findMany();
+  res.json(modelos);
+});
+
+router.get('/modelos/:id', async (req, res) => {
+  const { id } = req.params;
+  const modelo = await prisma.modelos.findUnique({
+    where: { id: parseInt(id) },
+  });
+  res.json(modelo);
+});
+
 export default router;
+
