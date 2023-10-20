@@ -30,4 +30,4 @@ model Asistencia {
   date         DateTime
   assistant     Assistant @relation(fields: [assistantId], references: [id])
   assistantId   Int
-} /////// emeli no hace tarea 
+} /////// Emeli no hace tarea 
