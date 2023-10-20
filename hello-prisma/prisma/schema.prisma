@@ -31,19 +31,18 @@ model Series {
 //////////////////////////////////////////////////////////////////////////
 
 model Area {
-  id          Int       @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   name        String
   asistente  Asistente[]
 }
 
 model Asistente {
-  id         Int       @id @default(autoincrement())
+  id         Int        @id @default(autoincrement())
   name       String
   area       Area      @relation(fields: [areaId], references: [id])
   areaId     Int
   asistencia Asistencia[]
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 
