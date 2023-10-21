@@ -19,8 +19,8 @@ export class AppRoutes {
     router.use('/api/cliente', ClienteRoutes.routes );
     router.use('/api/modelo', ModeloRoutes.routes );
     router.use('/api/serie', SerieRoutes.routes );
-    router.use('/api/asistencia', AsistenciasRoutes.routes );
     router.use('/api/area', AreaIdRoutes.routes );
+    router.use('/api/asistente', AsistenteIdRoutes.routes );
     
     return router;
   }
