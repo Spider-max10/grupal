@@ -53,12 +53,6 @@ router.delete('/clientes/:id', async (req, res) => {
 
 
 
-
-
-
-
-
-
 // Rutas para el modelo Serie
 router.get('/series', async (req, res) => {
   const series = await prisma.series.findMany();
