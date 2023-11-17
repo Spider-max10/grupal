@@ -7,12 +7,9 @@ export class CreateModeloDto {
   
       const { tipo, modelo} = props;
   
-      if (!tipo) {
-        return ['La propiedad tipo es obligatoria', undefined];
-      }
-      if (!modelo) {
-        return ['La propiedad modelo es obligatoria', undefined];
-      }
+      if ( !tipo) return ['id property is required', undefined];
+  
+  
       return [undefined, new CreateModeloDto(tipo, modelo)];
     }
   }
