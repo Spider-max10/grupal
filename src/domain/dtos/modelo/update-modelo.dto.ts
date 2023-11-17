@@ -1,3 +1,5 @@
+
+
 export class UpdateModeloDto {
 
     private constructor(
@@ -29,6 +31,3 @@ export class UpdateModeloDto {
       }
       return [undefined, new UpdateModeloDto(tipo, modelo)];
     }
-    
-  
-  }
