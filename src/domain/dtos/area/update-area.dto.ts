@@ -1,6 +1,4 @@
-
-
-export class UpdateAreaIdDto {
+export class UpdateAreaDto {
 
     private constructor(
       
@@ -17,7 +15,7 @@ export class UpdateAreaIdDto {
     }
   
   
-    static create( props: {[key:string]: any} ): [string?, UpdateAreaIdDto?]  {
+    static create( props: {[key:string]: any} ): [string?, UpdateAreaDto?]  {
   
       const { id, narea } = props;
       let newName = narea;
@@ -29,7 +27,7 @@ export class UpdateAreaIdDto {
       if ( !id && !narea ) {
         return ['At least one property must be provided'];
       }
-      return [undefined, new UpdateAreaIdDto(id, narea)];
+      return [undefined, new UpdateAreaDto(id, narea)];
     }
     
   
