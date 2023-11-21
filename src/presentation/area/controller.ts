@@ -1,76 +1,76 @@
 import { Request, Response } from 'express';
 import { prisma } from '../../data/postgres';
-import { CreateAreaIdDto, UpdateAreaIdDto } from '../../domain/dtos';
+import { CreateAreaDto, UpdateAreaDto } from '../../domain/dtos';
 
 
-export class AreaIdController {
+export class AreaController {
   //* DI
   constructor() { }
-  public getAreaId = async( req: Request, res: Response ) => {
-    const areaIds = await prisma.areaId.findMany();
-    return res.json( areaIds);
+  public getArea = async( req: Request, res: Response ) => {
+    const area = await prisma.area.findMany();
+    return res.json( area);
   };
 
 
 
 
-  public getAreaIdById = async( req: Request, res: Response ) => {
+  public getAreaById = async( req: Request, res: Response ) => {
     const id = +req.params.id;
     //    localhost:3000/movies/1
     if ( isNaN( id ) ) return res.status( 400 ).json( { error: 'ID argument is not a number' } );
 
-    const areaIds = await prisma.areaId.findFirst({
+    const area = await prisma.area.findFirst({
       where: { id }
     });
     
-    ( areaIds )
-      ? res.json( areaIds )
+    ( area )
+      ? res.json( area )
       : res.status( 404 ).json( { error: `Area with id ${ id } not found` } );
   };
 
 
 
 
-  public createAreaId = async( req: Request, res: Response ) => {
+  public createArea = async( req: Request, res: Response ) => {
     
-    const [error, createAreaIdDto] = CreateAreaIdDto.create(req.body);
+    const [error, createAreaDto] = CreateAreaDto.create(req.body);
     if ( error ) return res.status(400).json({ error });
 
-    const areaIds = await prisma.areaId.create({
-    data : createAreaIdDto!
+    const area = await prisma.area.create({
+    data : createAreaDto!
     });
 
-    res.json( areaIds );
+    res.json( area );
 
   };
 
 
 
-  public updateAreaId = async( req: Request, res: Response ) => {
+  public updateArea = async( req: Request, res: Response ) => {
     const id = +req.params.id;
-    const [error, updateAreaIdDto] = UpdateAreaIdDto.create({...req.body, id});
+    const [error, updateAreaDto] = UpdateAreaDto.create({...req.body, id});
     if ( error ) return res.status(400).json({ error });
     
-    const areaIds = await prisma.areaId.findFirst({
+    const area = await prisma.area.findFirst({
       where: { id }
     });
-    if ( !areaIds ) return res.status( 404 ).json( { error: `Area with id ${ id } not found` } );
-    const updatedAreaId = await prisma.areaId.update({
+    if ( !area ) return res.status( 404 ).json( { error: `Area with id ${ id } not found` } );
+    const updatedArea = await prisma.area.update({
       where: { id },
-      data: updateAreaIdDto!.values
+      data: updateAreaDto!.values
     });
-    res.json( updatedAreaId );
+    res.json( updatedArea );
   }
 
 
-  public deleteAreaId = async(req:Request, res: Response) => {
+  public deleteArea = async(req:Request, res: Response) => {
     const id = +req.params.id;
-    const areaIds = await prisma.areaId.findFirst({
+    const area = await prisma.area.findFirst({
       where: { id }
     });
 
-    if ( !areaIds ) return res.status(404).json({ error: `Area with id ${ id } not found` });
-    const deleted = await prisma.areaId.delete({
+    if ( !area ) return res.status(404).json({ error: `Area with id ${ id } not found` });
+    const deleted = await prisma.area.delete({
       where: { id }
     });
     ( deleted ) 

@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import { AreaIdController } from './controller';
+import { AreaController } from './controller';
 
-export class AreaIdRoutes {
+export class AreaRoutes {
   static get routes(): Router {
     const router = Router();
-    const areasController = new AreaIdController();
-    router.get('/', areasController.getAreaId);
-    router.get('/:id', areasController.getAreaIdById );
-    router.post('/', areasController.createAreaId );
-    router.put('/:id', areasController.updateAreaId );
-    router.delete('/:id', areasController.deleteAreaId );
+    const areaController = new AreaController();
+    router.get('/', areaController.getArea);
+    router.get('/:id', areaController.getAreaById );
+    router.post('/', areaController.createArea );
+    router.put('/:id', areaController.updateArea );
+    router.delete('/:id', areaController.deleteArea );
     return router;
   }
 }

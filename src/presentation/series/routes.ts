@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import { seriesIdController } from './controller';
+import { serieController } from './controller';
 
 export class SerieRoutes {
   static get routes(): Router {
     const router = Router();
-    const SeriesController = new seriesIdController();
-    router.get('/', SeriesController.getSeriesId);
-    router.get('/:id', SeriesController.getSeriesId);
-    router.post('/', SeriesController.createSeriesId );
-    router.put('/:id', SeriesController.updateSeriesId );
-    router.delete('/:id', SeriesController.deleteSeriesId );
+    const SerieController = new serieController();
+    router.get('/', SerieController.getSerie);
+    router.get('/:id', SerieController.getSerie);
+    router.post('/', SerieController.createSerie );
+    router.put('/:id', SerieController.updateSerie );
+    router.delete('/:id', SerieController.deleteSerie );
     return router;
   }
 }

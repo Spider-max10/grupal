@@ -7,7 +7,7 @@ export class clienteController {
   //* DI
   constructor() { }
   public getClientes = async( req: Request, res: Response ) => {
-    const clienteId = await prisma.clienteId.findMany();
+    const clienteId = await prisma.cliente.findMany();
     return res.json( clienteId );
   };
 
@@ -19,7 +19,7 @@ export class clienteController {
     //    localhost:3000/movies/1
     if ( isNaN( id ) ) return res.status( 400 ).json( { error: 'ID argument is not a number' } );
 
-    const clienteId = await prisma.clienteId.findFirst({
+    const clienteId = await prisma.cliente.findFirst({
       where: { id }
     });
     
@@ -36,7 +36,7 @@ export class clienteController {
     const [error, createClienteDto] = CreateClienteDto.create(req.body);
     if ( error ) return res.status(400).json({ error });
 
-    const clienteId = await prisma.clienteId.create({
+    const clienteId = await prisma.cliente.create({
       data: createClienteDto!
     });
 
@@ -51,11 +51,11 @@ export class clienteController {
     const [error, updateClienteDto] = UpdateClienteDto.create({...req.body, id});
     if ( error ) return res.status(400).json({ error });
     
-    const clienteId = await prisma.clienteId.findFirst({
+    const clienteId = await prisma.cliente.findFirst({
       where: { id }
     });
     if ( !clienteId ) return res.status( 404 ).json( { error: `Cliente with id ${ id } not found` } );
-    const updatedCliente = await prisma.clienteId.update({
+    const updatedCliente = await prisma.cliente.update({
       where: { id },
       data: updateClienteDto!.values
     });
@@ -65,12 +65,12 @@ export class clienteController {
 
   public deleteCliente = async(req:Request, res: Response) => {
     const id = +req.params.id;
-    const cliente = await prisma.clienteId.findFirst({
+    const cliente = await prisma.cliente.findFirst({
       where: { id }
     });
 
     if ( !cliente ) return res.status(404).json({ error: `Cliente with id ${ id } not found` });
-    const deleted = await prisma.clienteId.delete({
+    const deleted = await prisma.cliente.delete({
       where: { id }
     });
     ( deleted ) 

@@ -31,3 +31,6 @@ export class UpdateModeloDto {
       }
       return [undefined, new UpdateModeloDto(tipo, modelo)];
     }
+    
+  
+  }

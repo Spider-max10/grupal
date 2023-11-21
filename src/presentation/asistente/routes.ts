@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import { AsistenteIdController } from './controller';
+import { AsistenteController } from './controller';
 
 export class AsistenteIdRoutes {
   static get routes(): Router {
     const router = Router();
-    const asistenteController = new AsistenteIdController();
+    const asistenteController = new AsistenteController();
     router.get('/', asistenteController.getAsistente);
     router.get('/:id', asistenteController.getAsistente );
-    router.post('/', asistenteController.createAsistenteId );
-    router.put('/:id', asistenteController.updateAsistenteId );
-    router.delete('/:id', asistenteController.deleteAsistenteId );
+    router.post('/', asistenteController.createAsistente );
+    router.put('/:id', asistenteController.updateAsistente );
+    router.delete('/:id', asistenteController.deleteAsistente );
     return router;
   }
 }

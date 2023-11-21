@@ -7,8 +7,12 @@ export class CreateClienteDto {
   
       const { name, email} = props;
   
-      if ( !name) return ['id property is required', undefined];
-  
+      if (!name) {
+        return ['La propiedad name es obligatoria', undefined];
+      }
+      if (!email) {
+        return ['La propiedad email es obligatoria', undefined];
+      }
   
       return [undefined, new CreateClienteDto(name, email)];
     }

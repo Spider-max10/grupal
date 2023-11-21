@@ -1,6 +1,6 @@
 
 
-export class UpdateAsistenteIdDto {
+export class UpdateAsistenteDto {
 
     private constructor(
       
@@ -22,7 +22,7 @@ export class UpdateAsistenteIdDto {
     }
   
   
-    static create( props: {[key:string]: any} ): [string?, UpdateAsistenteIdDto?]  {
+    static create( props: {[key:string]: any} ): [string?, UpdateAsistenteDto?]  {
   
       const { id, caracteristicas,descripcion,soporte,areaId } = props;
       let newName = caracteristicas;
@@ -31,10 +31,10 @@ export class UpdateAsistenteIdDto {
         return ['id must be a valid number'];
       }
   
-      if ( !caracteristicas && !descripcion ) {
+      if ( !caracteristicas && !descripcion && !soporte && !areaId ) {
         return ['At least one property must be provided'];
       }
-      return [undefined, new UpdateAsistenteIdDto (id, caracteristicas,descripcion,soporte, areaId )];
+      return [undefined, new UpdateAsistenteDto (id, caracteristicas,descripcion,soporte, areaId )];
     }
     
   

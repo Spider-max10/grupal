@@ -1,76 +1,76 @@
 import { Request, Response } from 'express';
 import { prisma } from '../../data/postgres';
-import {CreateSeriesIdDto, UpdateSeriesIdDto} from '../../domain/dtos/'
+import {CreateSeriesDto, UpdateSeriesDto} from '../../domain/dtos/'
 
 
-export class seriesIdController {
+export class serieController {
   //* DI
   constructor() { }
-  public getSeriesId = async( req: Request, res: Response ) => {
-    const serie = await prisma.seriesId.findMany();
+  public getSerie = async( req: Request, res: Response ) => {
+    const serie = await prisma.serie.findMany();
     return res.json( serie );
   };
 
 
 
 
-  public getSeriesIdById = async( req: Request, res: Response ) => {
+  public getSerieById = async( req: Request, res: Response ) => {
     const id = +req.params.id;
     //    localhost:3000/movies/1
     if ( isNaN( id ) ) return res.status( 400 ).json( { error: 'ID argument is not a number' } );
 
-    const seriesId = await prisma.seriesId.findFirst({
+    const serie = await prisma.serie.findFirst({
       where: { id }
     });
     
-    ( seriesId )
-      ? res.json( seriesId )
+    ( serie )
+      ? res.json( serie )
       : res.status( 404 ).json( { error: `Serie with id ${ id } not found` } );
   };
 
 
 
 
-  public createSeriesId = async( req: Request, res: Response ) => {
+  public createSerie = async( req: Request, res: Response ) => {
     
-    const [error, createSeriesIdDto] = CreateSeriesIdDto.create(req.body);
+    const [error, createSerieDto] = CreateSeriesDto.create(req.body);
     if ( error ) return res.status(400).json({ error });
 
-    const seriesId = await prisma.seriesId.create({
-      data: createSeriesIdDto!
+    const serie = await prisma.serie.create({
+      data: createSerieDto!
     });
 
-    res.json( seriesId );
+    res.json( serie );
 
   };
 
 
 
-  public updateSeriesId = async( req: Request, res: Response ) => {
+  public updateSerie = async( req: Request, res: Response ) => {
     const id = +req.params.id;
-    const [error, updateSeriesIdDto] = UpdateSeriesIdDto.create({...req.body, id});
+    const [error, updateSerieDto] = UpdateSeriesDto.create({...req.body, id});
     if ( error ) return res.status(400).json({ error });
     
-    const serie = await prisma.seriesId.findFirst({
+    const serie = await prisma.serie.findFirst({
       where: { id }
     });
     if ( !serie ) return res.status( 404 ).json( { error: `Serie with id ${ id } not found` } );
-    const updatedSeriesId = await prisma.seriesId.update({
+    const updatedSerie = await prisma.serie.update({
       where: { id },
-      data: updateSeriesIdDto!.values
+      data: updateSerieDto!.values
     });
-    res.json( updateSeriesIdDto );
+    res.json( updateSerieDto );
   }
 
 
-  public deleteSeriesId = async(req:Request, res: Response) => {
+  public deleteSerie = async(req:Request, res: Response) => {
     const id = +req.params.id;
-    const seriesId = await prisma.seriesId.findFirst({
+    const serie = await prisma.serie.findFirst({
       where: { id }
     });
 
-    if ( !seriesId ) return res.status(404).json({ error: `Serie with id ${ id } not found` });
-    const deleted = await prisma.seriesId.delete({
+    if ( !serie ) return res.status(404).json({ error: `Serie with id ${ id } not found` });
+    const deleted = await prisma.serie.delete({
       where: { id }
     });
     ( deleted ) 

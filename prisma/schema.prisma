@@ -10,44 +10,49 @@ datasource db {
   url      = env("POSTGRES_URL")
 }
 
-model SeriesId {
+model Serie {
   id              Int           @id @default(autoincrement())
   consumible      String        @unique
   tipo            String  
-  conexion        String
   modelo          Modelo        @relation(fields: [modeloId], references: [id])
   modeloId        Int
-  asistencia      Asistencia[]
+  conector        Conector        @relation(fields: [conectorId], references: [id])
+  conectorId      Int
+  asistencias     Asistencia[]
 
 }
 
-model ClienteId {
+model Cliente {
   id              Int           @id @default(autoincrement())
   name            String        @unique
   email           String
-  asistencia      Asistencia[]
+  asistencias     Asistencia[]
 }
 
+//Soporte y atención al cliente
 model Asistencia {
   id              Int           @id @default(autoincrement())
-  instancia       String?
+  instancia       String
   servicio        String
   atencion        String
-  series          SeriesId      @relation(fields: [seriesId], references: [id])
-  seriesId        Int
-  asistentes      AsistenteId   @relation(fields: [asistenteId], references: [id])
+  serie           Serie      @relation(fields: [serieId], references: [id])
+  serieId        Int
+  asistente      Asistente   @relation(fields: [asistenteId], references: [id])
   asistenteId     Int
-  clientes        ClienteId     @relation(fields: [clienteId], references: [id])
+  cliente        Cliente     @relation(fields: [clienteId], references: [id])
   clienteId       Int
+  tecnico        Tecnico     @relation(fields: [tecnicoId], references: [id])
+  tecnicoId       Int
 }
 
-model AsistenteId {
+// Solución de problemas de la impresora
+model Asistente {
   id              Int           @id @default(autoincrement())
   caracteristicas String
   descripcion     String
   soporte         String
-  asistencia      Asistencia[]
-  areas           AreaId        @relation(fields: [areaId], references: [id])
+  asistencias      Asistencia[]
+  area           Area        @relation(fields: [areaId], references: [id])
   areaId          Int 
 
 }
@@ -56,11 +61,25 @@ model Modelo {
   id              Int           @id @default(autoincrement())
   tipo            String  
   modelo          String
-  seriales        SeriesId[]
+  series        Serie[]
 }
 
-model AreaId {
+model Area {
   id              Int           @id @default(autoincrement())
-  narea           Int
-  asistente       AsistenteId[]
+  narea           String
+  asistentes       Asistente[]
+}
+
+model Conector {
+  id              Int           @id @default(autoincrement())
+  tipo            String        @unique
+  descripcion     String
+  series          Serie[]
+}
+
+model Tecnico {
+  id              Int           @id @default(autoincrement())
+  nombre          String        @unique
+  ntelefono       Int 
+  asistencias          Asistencia[]
 }
